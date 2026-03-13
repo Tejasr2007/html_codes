@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coding Club Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+        }
+        .form-container {
+            max-width: 500px;
+            background: #ffffff;
+            padding: 25px;
+            margin: 40px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #1e2a38;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="file"] {
+            padding: 5px;
+        }
+        input[readonly] {
+            background-color: #e9ecef;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #1e88e5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Coding Club Registration</h2>
+
+    <form id="registrationForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+
+        <label for="roll">Roll Number</label>
+        <input type="text" id="roll" placeholder="Enter roll number" required>
+
+        <label for="email">Email ID</label>
+        <input type="email" id="email" placeholder="Enter email" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="Enter phone number" required>
+
+        <label for="year">Year of Study</label>
+        <select id="year" required>
+            <option value="">Select Year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+        </select>
+
+        <label for="course">Select Course</label>
+        <select id="course" required>
+            <option value="">Choose a course</option>
+            <option>Core Java</option>
+            <option>Advanced Java</option>
+            <option>AI</option>
+            <option>ML</option>
+            <option>Python with AI</option>
+            <option>Python with ML</option>
+        </select>
+
+        <label for="payment">Payment Mode</label>
+        <select id="payment" required>
+            <option value="">Select Payment Mode</option>
+            <option>Online</option>
+            <option>Offline</option>
+        </select>
+
+        <label for="screenshot">Payment Screenshot</label>
+        <input type="file" id="screenshot" accept="image/*" required>
+
+        <!-- Fees Section -->
+        <label for="registrationFee">Registration Fee</label>
+        <input type="text" id="registrationFee" value="50" readonly>
+
+        <label for="classFee">Coding Class Fee</label>
+        <input type="text" id="classFee" value="50" readonly>
+
+        <label for="totalFee">Total Fee</label>
+        <input type="text" id="totalFee" value="100" readonly>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+<script>
+    // Fees calculation
+    const registrationFee = 50;
+    const classFee = 50;
+    const totalFeeInput = document.getElementById('totalFee');
+    totalFeeInput.value = registrationFee + classFee;
+
+    // Form submission
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Basic validation
+        const name = document.getElementById('name').value.trim();
+        const roll = document.getElementById('roll').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const year = document.getElementById('year').value;
+        const course = document.getElementById('course').value;
+        const payment = document.getElementById('payment').value;
+        const screenshot = document.getElementById('screenshot').files[0];
+
+        if (!name || !roll || !email || !phone || !year || !course || !payment || !screenshot) {
+            alert("Please fill all required fields and upload payment screenshot!");
+            return;
+        }
+
+        // Show submission confirmation
+        alert(`Registration successful!\nTotal Fee: ${totalFeeInput.value}`);
+
+        // Reset form
+        this.reset();
+        totalFeeInput.value = registrationFee + classFee;
+    });
+</script>
+
+</body>
+</html>
